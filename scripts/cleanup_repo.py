@@ -48,7 +48,7 @@ class RepoCleanupManager:
         Returns:
             Cleanup report with issues found and fixes applied
         """
-        print("🔧 Starting comprehensive repository cleanup...")
+        print("Starting comprehensive repository cleanup...")
 
         # Run all cleanup tasks
         tasks = [
@@ -93,7 +93,7 @@ class RepoCleanupManager:
         with open(report_path, 'w') as f:
             json.dump(report, f, indent=2)
 
-        print(f"\n📊 Cleanup complete! Report saved to {report_path}")
+        print(f"\nCleanup complete! Report saved to {report_path}")
         print(f"   Total issues found: {total_issues}")
         print(f"   Total fixes applied: {total_fixes}")
 
@@ -350,7 +350,7 @@ rich>=12.0.0
             file_path = self.repo_path / sensitive_file
             if file_path.exists():
                 issues_found += 1
-                print(f"   ⚠️  Found sensitive file: {sensitive_file}")
+                print(f"   WARNING: Found sensitive file: {sensitive_file}")
 
         # Check .gitignore file
         gitignore_path = self.repo_path / ".gitignore"
@@ -427,7 +427,7 @@ secrets.json
                 matches = re.findall(pattern, content, re.IGNORECASE)
                 if matches:
                     issues_found += len(matches)
-                    print(f"   ⚠️  Potential hardcoded secrets in {py_file.name}")
+                    print(f"   WARNING: Potential hardcoded secrets in {py_file.name}")
 
         return {
             "issues_found": issues_found,
@@ -449,7 +449,7 @@ secrets.json
                 issues_found += 1
 
         if large_files:
-            print("   ⚠️  Large files found:")
+            print("   WARNING: Large files found:")
             for file_path, size in large_files:
                 print(f"      {file_path.name}: {size / (1024*1024):.1f} MB")
 
@@ -501,7 +501,7 @@ secrets.json
         git_dir = self.repo_path / ".git"
         if not git_dir.exists():
             issues_found += 1
-            print("   ⚠️  Not a Git repository")
+            print("   WARNING: Not a Git repository")
             return {"issues_found": issues_found, "fixes_applied": fixes_applied, "is_git_repo": False}
 
         try:
@@ -513,7 +513,7 @@ secrets.json
                 uncommitted_files = len(result.stdout.strip().split('\n')) if result.stdout.strip() else 0
                 if uncommitted_files > 0:
                     issues_found += uncommitted_files
-                    print(f"   ⚠️  {uncommitted_files} uncommitted files")
+                    print(f"   WARNING: {uncommitted_files} uncommitted files")
 
             # Check for large files in Git history
             result = subprocess.run(["git", "ls-files"],
@@ -531,15 +531,15 @@ secrets.json
                             issues_found += 1
 
                 if large_tracked_files:
-                    print("   ⚠️  Large files tracked by Git:")
+                    print("   WARNING: Large files tracked by Git:")
                     for file_path in large_tracked_files:
                         size = (self.repo_path / file_path).stat().st_size
                         print(f"      {file_path}: {size / (1024*1024):.1f} MB")
 
         except FileNotFoundError:
-            print("   ⚠️  Git not available")
+            print("   WARNING: Git not available")
         except subprocess.CalledProcessError as e:
-            print(f"   ⚠️  Git command failed: {e}")
+            print(f"   WARNING: Git command failed: {e}")
 
         return {
             "issues_found": issues_found,
@@ -583,7 +583,7 @@ secrets.json
                     issues_found += 1
 
         if permission_issues:
-            print(f"   ⚠️  Found {len(permission_issues)} files with world-writable permissions")
+            print(f"   WARNING: Found {len(permission_issues)} files with world-writable permissions")
 
         return {
             "issues_found": issues_found,
@@ -646,7 +646,7 @@ def main():
     else:
         repo_path = "."
 
-    print("🧹 OpenInvestments Repository Cleanup Tool")
+    print("OpenInvestments Repository Cleanup Tool")
     print("=" * 50)
 
     cleanup_manager = RepoCleanupManager(repo_path)

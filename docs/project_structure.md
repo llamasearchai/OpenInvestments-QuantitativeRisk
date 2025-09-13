@@ -27,7 +27,7 @@ openinvestments-quantitative-risk/
 └── 📁 reports/                    # Generated reports (generated)
 ```
 
-## 🔧 Core Source Code Structure (`src/openinvestments/`)
+## Core Source Code Structure (`src/openinvestments/`)
 
 ```
 src/openinvestments/
@@ -85,7 +85,7 @@ src/openinvestments/
         └── 📄 observability.py     # Observability middleware
 ```
 
-## 📊 Data and Configuration Files
+## Data and Configuration Files
 
 ### Environment Configuration (`config.env.example`)
 
@@ -223,7 +223,7 @@ ipykernel>=6.0.0
 notebook>=6.4.0
 ```
 
-## 🧪 Test Structure (`tests/`)
+## Test Structure (`tests/`)
 
 ```
 tests/
@@ -246,7 +246,7 @@ tests/
 └── 📄 test_installation.py      # Installation verification
 ```
 
-## 📜 Scripts Directory (`scripts/`)
+## Scripts Directory (`scripts/`)
 
 ```
 scripts/
@@ -287,7 +287,7 @@ docs/
     └── 📄 production_deployment.md
 ```
 
-## 🗃️ Data and Model Storage
+## Data and Model Storage
 
 ### Data Directory (`data/`)
 
@@ -339,7 +339,7 @@ reports/
 └── 📁 custom/                   # Custom reports
 ```
 
-## 🔧 Development Workflow
+## Development Workflow
 
 ### Code Organization Principles
 
@@ -378,7 +378,7 @@ from ..core.config import config
 from ..valuation.monte_carlo import MonteCarloPricer
 ```
 
-## 🚀 Deployment Structure
+## Deployment Structure
 
 ### Docker Multi-stage Build
 
@@ -412,7 +412,7 @@ k8s/
 └── 📄 hpa.yaml                  # Horizontal pod autoscaling
 ```
 
-## 📊 Monitoring and Observability
+## Monitoring and Observability
 
 ### Metrics Collection
 
@@ -454,7 +454,7 @@ k8s/
 - **Security Events**: Failed authentication, suspicious activity
 - **Data Quality**: Missing data, outliers, stale data
 
-## 🔒 Security Considerations
+## Security Considerations
 
 ### Data Protection
 
@@ -470,7 +470,7 @@ k8s/
 - **Database Security**: Connection pooling, query parameterization
 - **File System Security**: Proper permissions, secure file handling
 
-## 📈 Performance Optimization
+## Performance Optimization
 
 ### Code Optimization
 

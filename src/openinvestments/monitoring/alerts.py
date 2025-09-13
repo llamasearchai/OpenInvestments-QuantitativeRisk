@@ -216,7 +216,7 @@ class SlackChannel(AlertChannel):
                     "type": "header",
                     "text": {
                         "type": "plain_text",
-                        "text": f"🚨 {alert.title}"
+                        "text": f"ALERT: {alert.title}"
                     }
                 },
                 {

@@ -67,12 +67,12 @@ class PlatformDemonstrator:
     def print_header(self, title: str):
         """Print formatted section header."""
         print(f"\n{'='*60}")
-        print(f"🎯 {title}")
+        print(f"DEMO: {title}")
         print(f"{'='*60}")
 
     def print_subheader(self, title: str):
         """Print formatted subsection header."""
-        print(f"\n📍 {title}")
+        print(f"\nSECTION: {title}")
         print(f"{'─'*40}")
 
     def print_result(self, label: str, value: Any, unit: str = ""):
@@ -374,7 +374,7 @@ class PlatformDemonstrator:
         """Run complete platform demonstration."""
         self.print_header("OpenInvestments Quantitative Risk Platform Demo")
 
-        print("🚀 Demonstrating comprehensive quantitative finance capabilities...")
+        print("Demonstrating comprehensive quantitative finance capabilities...")
         print("This demo showcases the platform's core functionality including:")
         print("  • Option pricing and valuation")
         print("  • Risk analysis and portfolio management")
@@ -396,7 +396,7 @@ class PlatformDemonstrator:
         self.print_header("Demo Summary")
 
         print("✅ All demonstrations completed successfully!")
-        print("\n📊 Key Results:")
+        print("\nKey Results:")
 
         if 'option_pricing' in self.results:
             print(".4f")
@@ -413,8 +413,8 @@ class PlatformDemonstrator:
         if 'data_quality' in self.results:
             print(".1f")
 
-        print(f"\n🎯 Platform Status: {'✅ FULLY OPERATIONAL' if len(self.results) >= 6 else '⚠️ PARTIAL FUNCTIONALITY'}")
-        print(f"📈 Demonstrated Capabilities: {len(self.results)}/7 modules")
+        print(f"\nPlatform Status: {'FULLY OPERATIONAL' if len(self.results) >= 6 else 'PARTIAL FUNCTIONALITY'}")
+        print(f"Demonstrated Capabilities: {len(self.results)}/7 modules")
 
         # Performance metrics
         total_computation_time = sum([

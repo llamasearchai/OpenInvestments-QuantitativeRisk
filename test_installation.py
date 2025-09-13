@@ -118,7 +118,7 @@ def main():
     results = []
 
     for test_name, test_func in tests:
-        print(f"\n🧪 Running {test_name}...")
+        print(f"\nRunning {test_name}...")
         try:
             result = test_func()
             results.append((test_name, result))
@@ -151,7 +151,7 @@ def main():
         print("3. Start the API server with 'python main.py api'")
         return 0
     else:
-        print(f"\n⚠️  {total - passed} test(s) failed. Please check the error messages above.")
+        print(f"\nWARNING: {total - passed} test(s) failed. Please check the error messages above.")
         print("\nTroubleshooting:")
         print("1. Ensure all dependencies are installed: pip install -r requirements.txt")
         print("2. Check that you're using Python 3.8+")

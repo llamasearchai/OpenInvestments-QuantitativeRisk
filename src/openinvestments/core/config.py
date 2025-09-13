@@ -5,7 +5,8 @@ Core configuration module for OpenInvestments platform.
 import os
 from pathlib import Path
 from typing import Optional, List, Dict, Any
-from pydantic import BaseSettings, Field
+from pydantic import Field
+from pydantic_settings import BaseSettings
 
 
 class PlatformSettings(BaseSettings):
@@ -100,7 +101,7 @@ class PlatformSettings(BaseSettings):
         case_sensitive = False
 
 
-class Config:
+class ConfigManager:
     """Main configuration class providing access to all settings."""
 
     _instance: Optional[PlatformSettings] = None
@@ -123,9 +124,12 @@ class Config:
         """Ensure all required directories exist."""
         config = cls.get()
         for directory in [config.data_dir, config.models_dir, config.logs_dir, config.reports_dir]:
-            directory.mkdir(parents=True, exist_ok=True)
+            try:
+                directory.mkdir(parents=True, exist_ok=True)
+            except OSError as e:
+                print(f"Warning: Could not create directory {directory}: {e}")
 
 
 # Initialize configuration
-config = Config.get()
-Config.ensure_directories()
+config = ConfigManager.get()
+ConfigManager.ensure_directories()
