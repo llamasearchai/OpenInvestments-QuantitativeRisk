@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  openinvestments:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=false
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - DATABASE_URL=sqlite:///./data/openinvestments.db
+      - MLFLOW_TRACKING_URI=sqlite:///./data/mlflow.db
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./logs:/app/logs
+      - ./reports:/app/reports
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Optional: PostgreSQL database (uncomment to use)
+  # postgres:
+  #   image: postgres:15
+  #   environment:
+  #     POSTGRES_DB: openinvestments
+  #     POSTGRES_USER: openinvestments
+  #     POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   ports:
+  #     - "5432:5432"
+  #   restart: unless-stopped
+
+  # Optional: Redis for caching (uncomment to use)
+  # redis:
+  #   image: redis:7-alpine
+  #   ports:
+  #     - "6379:6379"
+  #   restart: unless-stopped
+
+  # Optional: MLflow tracking server (uncomment to use)
+  # mlflow:
+  #   image: ghcr.io/mlflow/mlflow:v2.8.1
+  #   ports:
+  #     - "5000:5000"
+  #   environment:
+  #     - MLFLOW_BACKEND_STORE_URI=sqlite:///./data/mlflow.db
+  #     - MLFLOW_ARTIFACT_STORE_URI=./data/mlruns
+  #   volumes:
+  #     - ./data:/mlflow/data
+  #   command: ["mlflow", "server", "--host", "0.0.0.0", "--port", "5000"]
+  #   restart: unless-stopped
+
+volumes:
+  postgres_data:
